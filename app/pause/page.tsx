@@ -1,10 +1,33 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
+const PAUSE_TITRE = 'Boutique temporairement fermée';
+const PAUSE_TEXTE =
+  'La vente en ligne est suspendue le temps de finaliser nos démarches administratives. Aucune commande ne peut être passée pendant cette période.';
+
+// Le layout racine annonce les punchs avec le visuel produit : on surcharge
+// openGraph/twitter/keywords, sinon un partage du lien afficherait une accroche
+// commerciale alors que la page annonce une fermeture. Le noindex ne protege
+// que du referencement, pas des apercus de partage.
 export const metadata: Metadata = {
-  title: 'Boutique temporairement fermée',
-  description: 'La vente en ligne est suspendue le temps de finaliser nos démarches administratives.',
+  title: PAUSE_TITRE,
+  description: PAUSE_TEXTE,
+  keywords: [],
   robots: { index: false, follow: false },
+  openGraph: {
+    type: 'website',
+    locale: 'fr_FR',
+    siteName: 'Bô Kay Mwen',
+    title: PAUSE_TITRE,
+    description: PAUSE_TEXTE,
+    images: [],
+  },
+  twitter: {
+    card: 'summary',
+    title: PAUSE_TITRE,
+    description: PAUSE_TEXTE,
+    images: [],
+  },
 };
 
 export default function PausePage() {
